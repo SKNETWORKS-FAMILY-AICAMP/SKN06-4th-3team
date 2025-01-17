@@ -1,11 +1,7 @@
 from django.http import JsonResponse
 from datetime import datetime
-from django.shortcuts import render
 from django.views.decorators.http import require_GET
-from .llm import Chatting, add_message_to_history, load_chroma_vector_store#, recommend_pharmacy
-
-VECTOR_STORE = load_chroma_vector_store()
-
+from .llm import Chatting, add_message_to_history
 
 @require_GET
 def chat_message(request, message):
@@ -32,4 +28,3 @@ def chat_message(request, message):
     # JsonResponse(dict): HttpResponse 타입
     ## dict를 JSON 형식으로 만들어서 응답.
     return JsonResponse({'response': response})
-

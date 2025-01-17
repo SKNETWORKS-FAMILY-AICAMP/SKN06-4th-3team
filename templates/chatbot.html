@@ -100,7 +100,28 @@
         cursor: pointer;
     }
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
 </style>
+
+<!-- 추가된 스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.10/dist/purify.min.js"></script>
 
 <script type="text/javascript">
     function sendMessage() {
@@ -131,7 +152,8 @@
 
                 let aiMessage = document.createElement('div');
                 aiMessage.className = 'message left';
-                aiMessage.innerText = data.response;
+                // Markdown 렌더링 및 보안 처리
+                aiMessage.innerHTML = DOMPurify.sanitize(marked.parse(data.response));
                 chatContainer.appendChild(aiMessage);
 
                 document.getElementById('chat_input').value = '';
