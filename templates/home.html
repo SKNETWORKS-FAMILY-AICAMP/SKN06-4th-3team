@@ -7,8 +7,18 @@
 {% block contents %}
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="text-center">
-        <h2 style="font-size: 5rem;">AI 약사</h2>
-        <p>증상에 따른 약을 추천받아보세요</p>
+        <h1 style="font-size: 5rem;">💊AI 약사💊</h1><br>
+        <p>AI 약사에게 증상을 물어보고 약을 추천받으세요.</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'chatbot' %}" class="btn btn-primary btn-lg" style="font-size: 2rem; padding: 1rem 2rem;">
+            챗봇 바로가기
+        </a>
+        {% endif %}
+        {% if not user.is_authenticated %}
+        <a href="{% url 'account:create' %}" class="btn btn-primary btn-lg" style="font-size: 1.2rem;">회원가입</a>
+        <a href="{% url 'account:login' %}" class="btn btn-primary btn-lg" style="font-size: 1.2rem;">로그인</a>
+        {% endif %}
     </div>
 </div>
 {% endblock contents %}
+

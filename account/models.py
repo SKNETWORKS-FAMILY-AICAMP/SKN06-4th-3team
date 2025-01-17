@@ -15,25 +15,19 @@ class User(AbstractUser):
     )
     birthday = models.DateField(
         verbose_name="생일",
-        null=True, # Null허용 (default: False - Not Null)
-        blank=True # Form - 필수가 아니다.(default: False - required)
     )
     gender = models.CharField(
         verbose_name="성별",
         max_length=1,
-        choices=[('M', '남성'),('F', '여성')],
-        null=True,
-        blank=True,
+        choices=[('M', '남성'),('F', '여성')]
     )
     groups = models.ManyToManyField(
         Group,
         related_name="account_users",  # 기본 user_set 대신 account_users 사용
-        blank=True
     )
     user_permissions = models.ManyToManyField(
         Permission,
         related_name="account_users_permissions",  # 기본 user_set 대신 account_users_permissions 사용
-        blank=True
     )
     
     

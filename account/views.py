@@ -97,7 +97,7 @@ def user_login(request):
             if request.GET.get('next'):
                 return redirect(request.GET.get('next'))
 
-            return redirect(reverse("chatbot"))
+            return redirect(reverse("home"))
         
         else: # 유효하지 않은 사용자.
             return render(

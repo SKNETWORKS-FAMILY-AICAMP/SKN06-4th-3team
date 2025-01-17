@@ -1,32 +1,25 @@
-<!-- account/templates/account/create.html -->
 {% extends "layout.html" %}
 {% load django_bootstrap5 %}
-
-{% comment %}
-
-- pip install django-bootstrap5
-- template에서 form을 출력할 때 bootstrap 스타일을 적용.
-- form 과 관련된 template 태그들을 제공
-1. load : {%load django_bootstrap5%}
-2. {{form}} 대신에 {% bootstrap_form  form객체 %}
-
-{% endcomment %}
-
-
 
 {% block title %}회원가입{% endblock title %}
 
 {% block contents %}
-<h1>회원가입</h1>
-<form method="post" 
-        enctype="multipart/form-data"
-        onsubmit='return check_name_length(this.name.value)'>
-    {% csrf_token %}
-    {% bootstrap_form form %} {#{form}#}
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">가입</button>
-        <button type="reset" class="btn btn-primary">초기화</button>
-    </div>
-</form>
+<header class="d-flex justify-content-end">
+    <a href="{% url 'home' %}" class="nav-link justify-content-end" style="font-size: 0.8rem; margin-left: auto;">HOME</a>
+    <a href="{% url 'account:login' %}" class="nav-link" style="font-size: 0.8rem; padding-left: 10px;">로그인</a>
+</header>
+
+<div class="mt-5 text-center" style="max-width:400px; margin: 0 auto;">
+    <h1 style="font-size: 3rem;">💊AI 약사💊 <br>회원가입</h1><br>
+    <form method="post" enctype="multipart/form-data" onsubmit='return check_name_length(this.name.value)'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="mt-3 text-center">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 40%; height: 40px;">가입</button>
+            <button type="reset" class="btn btn-secondary btn-sm" style="width: 40%; height: 40px;">초기화</button>
+        </div>
+    </form>
+</div>
+
 <script src="/static/account/js/check.js"></script>
 {% endblock contents %}
