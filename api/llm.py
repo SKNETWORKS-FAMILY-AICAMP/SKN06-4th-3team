@@ -7,7 +7,7 @@ from operator import itemgetter
 from langchain_openai import ChatOpenAI
 import os
 from langchain.vectorstores import Chroma
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_community.embeddings import OpenAIEmbeddings
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
