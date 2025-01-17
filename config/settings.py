@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api',
     'account',
     'django_bootstrap5',
+    'map'
 ]
 
 MIDDLEWARE = [

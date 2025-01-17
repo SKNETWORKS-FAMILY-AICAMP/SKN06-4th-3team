@@ -22,6 +22,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name="home"),
     path('chatbot/', TemplateView.as_view(template_name='chatbot.html'), name="chatbot"),  # ✅ chatbot URL 추가
     path('admin/', admin.site.urls),
+    path('map/', include('map.urls')),
     path('api/', include('api.urls', namespace="api")),
     path('account/', include('account.urls')),
 ]
