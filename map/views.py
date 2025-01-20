@@ -9,7 +9,7 @@ from geopy.distance import geodesic
 # Create your views here.
 def index(request):
     lat_lang = get_user_location_by_ip()
-
+    print(lat_lang)
     recommended_pharmacies = []
 
     if pharmacy.objects.all().count() == 0:
@@ -20,7 +20,6 @@ def index(request):
 
     for p in pharmacy.objects.all():
         # 위도와 경도 열 이름 확인
-
         pharmacy_location = (p.lng, p.lat)
         distance = geodesic(lat_lang, pharmacy_location).km
 
