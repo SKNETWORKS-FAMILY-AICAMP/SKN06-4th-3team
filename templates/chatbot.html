@@ -4,9 +4,31 @@
 {% block title %}AI 챗봇{% endblock title %}
 
 {% block contents %}
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+    내 위치 보기 
+</button>
+
+<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="staticBackdropLabel">약국찾기</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+    <div>
+        <h3>현재 내 위치</h3>
+        
+        <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
     <header>
-        <h1>채팅</h1>
+        <h1>💊 SKN06-4th-3Team 💊</h1>
+        <p><b>AI 약사 챗봇 + 인근 약국 조회 서비스</b></p>
     </header>
 
     <div class="chat-container p-3 shadow-sm rounded bg-light">
@@ -17,9 +39,37 @@
         <input type="text" class="form-control" placeholder="메시지를 입력하세요." id="chat_input"/>
         <button class="btn btn-primary" id="send_btn">전송</button>
     </div>
+
+    
 </div>
 
 <style>
+    header {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-align: center;
+        margin-bottom: 5;
+        background-color: #ffffff;
+        color: rgb(0, 0, 0);
+        padding: 20px 0;
+        width: 100%;
+        flex-grow: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 300px;
+        transition: margin-left 0.3s ease;
+    }
+
+    .header.collapsed {
+        margin-left: 0;
+    }
+    h1, p {
+        text-align: center;
+        color: #333;
+    }
+    
     body, html {
         margin: 0;
         padding: 0;
@@ -28,17 +78,37 @@
         flex-direction: column;
     }
 
-    header {
-        text-align: center;
-        margin-bottom: 30px;
-        background-color: #007bff;
-        color: white;
-        padding: 20px 0;
-        width: 100%;
-    }
+    
 
+    .container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+    .sidebar {
+    width: 330px;
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    transform: translateX(0);
+    resize: horizontal;
+    min-width: 250px;
+    max-width: 500px;
+}
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+    }   
     .chat-container {
-        width: 80vw; /* 전체 뷰포트 너비의 80% */
+        flex:2;
         max-width: 1200px; /* 최대 너비 제한 */
         min-width: 800px; /* 최소 너비 설정 */
         height: calc(100vh - 150px); /* 화면 높이에 맞게 조정 */

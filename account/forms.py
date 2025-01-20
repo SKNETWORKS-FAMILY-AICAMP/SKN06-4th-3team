@@ -24,11 +24,14 @@ class CustomUserCreationForm(UserCreationForm):
         # fields = "__all__" # 모델의 모든 field들을 사용해서 form field구성
         fields = ["username", "password1", "password2", 
                 "name", "birthday", "gender"] # form field로 구성할 것들들을 명시.
-        # exclude = ["필드명"] # 지정한 필드명을 제외한 나머지 필드드로 form 필드 구성.
-        # fields와 exclude는 같이 설정할 수 없다.
-        
-        # input type을 변경 -> Widget
-        ### {"field이름":Widget객체}
+        labels = {
+            "username": "아이디",
+            "password1": "비밀번호",
+            "password2": "비밀번호 확인",
+            "name": "이름",
+            "birthday": "생년월일",
+            "gender": "성별",
+        }
         widgets = {
             "birthday":forms.DateInput(attrs={"type":"date"}), #<input type='date'>
             # "name":forms.PasswordInput()

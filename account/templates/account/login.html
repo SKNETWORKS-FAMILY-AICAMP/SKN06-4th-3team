@@ -1,26 +1,30 @@
-<!-- account/templates/account/login.html -->
 {% extends 'layout.html' %}
 {% load django_bootstrap5 %}
 
 {% block title %}로그인{% endblock title %}
 
 {% block contents %}
-<h1>로그인</h1>
+<header class="d-flex justify-content-end">
+    <a href="{% url 'home' %}" class="nav-link justify-content-end" style="font-size: 0.8rem; margin-left: auto;">HOME</a>
+    <a href="{% url 'account:create' %}" class="nav-link" style="font-size: 0.8rem; padding-left: 10px;">회원가입</a>
+</header>
 
-{% if error_msg %}
-    <span style="color:red;font-size:0.8em">
-        {{error_msg}}
-    </span>
-{% endif %}
-<form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">로그인</button>
-        <button type="reset" class="btn btn-primary">초기화</button>
-
-    </div>
-</form>
+<div class="mt-5 text-center" style="max-width:300px; margin: 0 auto;">
+    <h1 style="font-size: 3rem;">💊AI 약사💊 로그인</h1><br><br>
+    {% if error_msg %}
+        <span style="color:red;font-size:0.8em">
+            {{error_msg}}
+        </span>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <div class="mt-3 text-center">
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 40%; height: 40px;">로그인</button>
+            <button type="reset" class="btn btn-secondary btn-sm" style="width: 40%;height: 40px;">초기화</button>
+        </div>
+    </form>
+</div>
 
 {% endblock contents %}
+

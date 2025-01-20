@@ -1,34 +1,36 @@
-<!-- account/templates/account/detail.html -->
 {% extends 'layout.html' %}
 
-{% block title%}회원정보{% endblock title%}
+{% block title%}회원정보{% endblock title %}
 
 {% block contents%}
-<h1>{{object.username}}님 회원 정보</h1>
-<table class="table">
-    <tr>
-        <th>성명</th>
-        <td>{{object.name}}</td>
-    </tr>
-    <tr>
-        <th>생년월일</th>
-        <td>{{object.birthday}}</td>
-    </tr>
-    <tr>
-        <th>성별</th>
-        <td>{{object.get_gender_display}}</td>
-    </tr>
-</table>
+<div class="mt-3 text-center">
+    <h1 style="font-size: 3rem;">{{object.username}}님 회원 정보</h1><br><br>
+    
+    <div class="table-responsive" style="max-width: 800px; margin: 0 auto;">
+        <table class="table table-striped mx-auto" style="width: 100%; font-size: 1.2rem; text-align: left;">
+            <tr style="height: 60px; vertical-align: middle;">
+                <th style="width: 30%; font-size: 1.3rem; vertical-align: middle; text-align: left;">성명</th>
+                <td style="font-size: 1.2rem; vertical-align: middle; text-align: left;">{{object.name}}</td>
+            </tr>
+            <tr style="height: 60px; vertical-align: middle;">
+                <th style="font-size: 1.3rem; vertical-align: middle; text-align: left;">생년월일</th>
+                <td style="font-size: 1.2rem; vertical-align: middle; text-align: left;">{{object.birthday}}</td>
+            </tr>
+            <tr style="height: 60px; vertical-align: middle;">
+                <th style="font-size: 1.3rem; vertical-align: middle; text-align: left;">성별</th>
+                <td style="font-size: 1.2rem; vertical-align: middle; text-align: left;">{{object.get_gender_display}}</td>
+            </tr>
+        </table>
+    </div><br>
 
-
-<div class="mt-3">
-    <a href="{% url 'account:password_change' %}" class="btn btn-primary">패스워드변경</a>
-    <a href="{% url 'account:update' %}" class="btn btn-primary">회원정보수정</a>
-    <a href="{% url 'account:delete' %}" 
-        class="btn btn-danger"
-        onclick="return confirm('정말 탈퇴 하시겠습니까?')">
-        탈퇴
-    </a>
+    <div class="mt-3">
+        <a href="{% url 'account:password_change' %}" class="btn btn-lg btn-primary">패스워드변경</a>
+        <a href="{% url 'account:update' %}" class="btn btn-lg btn-primary">회원정보수정</a>
+        <a href="{% url 'account:delete' %}" 
+            class="btn btn-lg btn-danger"
+            onclick="return confirm('정말 탈퇴 하시겠습니까?')">
+            탈퇴
+        </a>
+    </div>
 </div>
-
 {% endblock contents%}

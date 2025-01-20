@@ -6,14 +6,16 @@
 {% block title %}회원정보수정{% endblock title %}
 
 {% block contents %}
-<h1>회원 정보 수정</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
+<h1 class="mt-5 text-center">회원 정보 수정</h1>
+<div class="mt-5 text-center" style="max-width:500px; margin: 0 auto;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
 
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary">수정</button>
-        <button type="reset" class="btn btn-primary">초기화</button>
-    </div>
-</form>
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary">수정</button>
+            <button type="reset" class="btn btn-primary">초기화</button>
+        </div>
+    </form>
+</div>
 {% endblock contents %}
