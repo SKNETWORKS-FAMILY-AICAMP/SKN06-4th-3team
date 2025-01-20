@@ -77,7 +77,7 @@
 ![image](https://github.com/user-attachments/assets/77a73f16-cc9d-466c-9b02-de7a255b552f)
 
 ### 테스트 계획서 및 테스트 결과 
-![테스트 계획서 및 확인서](https://github.com/user-attachments/assets/3d5c192f-938c-42fd-850e-51298fad2c9d)
+![테스트 계획 및 확인서](https://github.com/user-attachments/assets/346108f8-c821-4d02-a2d7-906c02758b02)
 
 ### 화면 설계서
 ![화면 설계서](https://github.com/user-attachments/assets/53659afe-08ca-49c8-b575-4a56c9df9a85)
