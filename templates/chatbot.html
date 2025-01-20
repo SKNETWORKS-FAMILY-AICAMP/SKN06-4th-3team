@@ -5,6 +5,13 @@
 
 {% block contents %}
 
+{%  if not user.is_authenticated %}
+    <script>
+        alert('로그인 후 이용해주세요');
+        location.href = "http://127.0.0.1:8000";
+    </script>
+{% endif %}
+
 <a href="http://127.0.0.1:8000/map/"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
     내 위치 보기 
 </button></a>
@@ -13,8 +20,11 @@
     <h1>💊 SKN06-4th-3Team 💊</h1>
     <p><b>AI 약사 챗봇 + 인근 약국 조회 서비스</b></p>
 
-    <div class="chat-container p-3 shadow-sm rounded bg-light">
+    <div class="chat-container p-3 shadow-sm rounded bg-light position-relative">
         <div class="message system-message">💬 AI 약사에게 질문해보세요!</div>
+        <div class="loading-gif d-none">
+            <img src="{% static '/api/Spin-loading.gif' %}" alt="Loading..." class="loading-image">
+        </div>
     </div>
 
     <div class="chat-input">
@@ -22,7 +32,6 @@
         <button class="btn btn-primary" id="send_btn">전송</button>
     </div>
 
-    
 </div>
 
 <style>
@@ -60,37 +69,16 @@
         flex-direction: column;
     }
 
-    
-
     .container {
-            display: flex;
-            flex-direction: row;
-            height: 100vh;
-        }
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        padding-bottom: 70px; /* chat-input 높이만큼 확보 */
+        position: relative;
+    }
 
-    .sidebar {
-    width: 330px;
-    background-color: #ffffff;
-    color: #333;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    transition: transform 0.3s ease, width 0.3s ease;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 1000;
-    transform: translateX(0);
-    resize: horizontal;
-    min-width: 250px;
-    max-width: 500px;
-}
-    .sidebar.collapsed {
-        transform: translateX(-100%);
-    }   
     .chat-container {
-        flex:2;
+        flex: 2;
         max-width: 1200px; /* 최대 너비 제한 */
         min-width: 800px; /* 최소 너비 설정 */
         height: calc(100vh - 150px); /* 화면 높이에 맞게 조정 */
@@ -101,6 +89,21 @@
         background-color: white;
         display: flex;
         flex-direction: column;
+        position: relative;
+        scroll-behavior: smooth; /* 스크롤 애니메이션 */
+    }
+
+    .loading-gif {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10; /* 항상 중앙에 보이게 설정 */
+    }
+
+    .loading-image {
+        width: 50px;
+        height: 50px;
     }
 
     .message {
@@ -134,6 +137,7 @@
         display: flex;
         gap: 10px;
         background-color: white;
+        border-radius: 20px; /* 모서리를 둥글게 설정 */
     }
 
     .chat-input input {
@@ -147,28 +151,14 @@
         padding: 10px 20px;
         border: none;
         border-radius: 20px;
-        background-color: #007bff;
+        background-color: #0c04ff;
         color: white;
         cursor: pointer;
     }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        font-size: 16px;
-        text-align: left;
+    .d-none {
+        display: none !important;
     }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
 </style>
 
 <!-- 추가된 스크립트 -->
@@ -196,9 +186,21 @@
         userMessage.innerText = message;
         chatContainer.appendChild(userMessage);
 
+        // ✅ 로딩 GIF 표시
+        let loadingGif = document.querySelector('.loading-gif');
+        loadingGif.classList.remove('d-none');
+
+        // ✅ 스크롤을 맨 아래로 이동
+        setTimeout(() => {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 100); // 약간의 지연으로 스크롤 애니메이션 완료
+
         let xhr = new XMLHttpRequest();
         xhr.open('GET', '/api/chat_message/' + message, true);
         xhr.onload = function() {
+            // ✅ 로딩 GIF 제거
+            loadingGif.classList.add('d-none');
+
             if (xhr.status === 200) {
                 let data = JSON.parse(xhr.responseText);
 
@@ -210,6 +212,8 @@
 
                 document.getElementById('chat_input').value = '';
                 document.getElementById('chat_input').focus();
+
+                // ✅ 스크롤을 맨 아래로 이동
                 chatContainer.scrollTop = chatContainer.scrollHeight;
             } else {
                 alert(`Error code: ${xhr.status}, Error Msg: ${xhr.statusText}`);
