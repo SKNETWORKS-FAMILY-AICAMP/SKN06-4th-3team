@@ -4,6 +4,12 @@
 {% block title %} 지도 {% endblock title %}
 
 {% block contents %}
+    {%  if not user.is_authenticated %}
+        <script>
+            alert('로그인 후 이용해주세요');
+            location.href = "http://127.0.0.1:8000";
+        </script>
+    {% endif %}
     <a href="http://127.0.0.1:8000/chatbot/"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
         챗봇 보기
     </button></a>
@@ -49,16 +55,5 @@
         {% endfor %}
        </table>
     </div>
-
-    <script>
-        document.querySelectorAll('.pharmacy').forEach(function(element) {
-            element.addEventListener('click', function() {
-                var lat = this.getAttribute('lat');
-                var lng = this.getAttribute('lng');
-                var moveLatLon = new kakao.maps.LatLng(lng, lat);
-                console.log(lng, lat);
-                map.setCenter(moveLatLon);
-            });
-        });
-    </script>
+<script src="{% static '/map/map.js' %}"></script>
 {% endblock contents %}
