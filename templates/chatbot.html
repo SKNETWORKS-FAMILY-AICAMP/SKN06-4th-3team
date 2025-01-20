@@ -4,32 +4,14 @@
 {% block title %}AI 챗봇{% endblock title %}
 
 {% block contents %}
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+
+<a href="http://127.0.0.1:8000/map/"><button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
     내 위치 보기 
-</button>
-
-<div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
-    <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="staticBackdropLabel">약국찾기</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-    <div>
-        <h3>현재 내 위치</h3>
-        
-        <div id="map"></div>
-        </div>
-    </div>
-</div>
-
-
-
+</button></a>
 
 <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
-    <header>
-        <h1>💊 SKN06-4th-3Team 💊</h1>
-        <p><b>AI 약사 챗봇 + 인근 약국 조회 서비스</b></p>
-    </header>
+    <h1>💊 SKN06-4th-3Team 💊</h1>
+    <p><b>AI 약사 챗봇 + 인근 약국 조회 서비스</b></p>
 
     <div class="chat-container p-3 shadow-sm rounded bg-light">
         <div class="message system-message">💬 AI 약사에게 질문해보세요!</div>
@@ -237,8 +219,10 @@
     }
     document.getElementById('send_btn').addEventListener('click', sendMessage);
     document.getElementById('chat_input').addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
+        if (event.keyCode == '13') {
             sendMessage();
+            document.getElementById('chat_input').value = '';
+
         }
     });
 </script>
