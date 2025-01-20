@@ -159,11 +159,60 @@
     .d-none {
         display: none !important;
     }
+
+    .chat-container .message.left table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .chat-container .message.left th, .chat-container .message.left td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .chat-container .message.left th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
 </style>
 
 <!-- 추가된 스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.10/dist/purify.min.js"></script>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        function loadChatHistory() {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/chat_history/', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    let data = JSON.parse(xhr.responseText);
+                    let chatContainer = document.querySelector('.chat-container');
+
+                    data.history.forEach(entry => {
+                        let messageDiv = document.createElement('div');
+                        messageDiv.className = 'message ' + (entry[0] === 'human' ? 'right' : 'left');
+                        
+                        // ✅ Markdown을 적용하여 렌더링
+                        messageDiv.innerHTML = DOMPurify.sanitize(marked.parse(entry[1])); 
+                        chatContainer.appendChild(messageDiv);
+                    });
+
+                    // ✅ 스크롤을 맨 아래로 이동
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }
+            };
+            xhr.send();
+        }
+
+        // 페이지 로드 시 대화 기록 불러오기
+        loadChatHistory();
+    });
+</script>
+
 
 <script type="text/javascript">
     function sendMessage() {
