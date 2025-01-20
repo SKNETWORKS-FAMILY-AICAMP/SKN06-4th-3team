@@ -5,6 +5,9 @@
 
 {% block contents %}
 
+<link rel="stylesheet" href="{% static 'api/styles.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 {%  if not user.is_authenticated %}
     <script>
         alert('로그인 후 이용해주세요');
@@ -34,149 +37,6 @@
 
 </div>
 
-<style>
-    header {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        text-align: center;
-        margin-bottom: 5;
-        background-color: #ffffff;
-        color: rgb(0, 0, 0);
-        padding: 20px 0;
-        width: 100%;
-        flex-grow: 1;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-left: 300px;
-        transition: margin-left 0.3s ease;
-    }
-
-    .header.collapsed {
-        margin-left: 0;
-    }
-    h1, p {
-        text-align: center;
-        color: #333;
-    }
-    
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: row;
-        height: 100%;
-        padding-bottom: 70px; /* chat-input 높이만큼 확보 */
-        position: relative;
-    }
-
-    .chat-container {
-        flex: 2;
-        max-width: 1200px; /* 최대 너비 제한 */
-        min-width: 800px; /* 최소 너비 설정 */
-        height: calc(100vh - 150px); /* 화면 높이에 맞게 조정 */
-        margin: 10px auto;
-        padding: 20px;
-        overflow-y: auto;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        scroll-behavior: smooth; /* 스크롤 애니메이션 */
-    }
-
-    .loading-gif {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10; /* 항상 중앙에 보이게 설정 */
-    }
-
-    .loading-image {
-        width: 50px;
-        height: 50px;
-    }
-
-    .message {
-        padding: 10px 15px;
-        border-radius: 15px;
-        max-width: 70%;
-        overflow-wrap: break-word;
-    }
-
-    .left {
-        align-self: flex-start;
-        background-color: #d7ffb2;
-        text-align: left;
-    }
-
-    .right {
-        align-self: flex-end;
-        background-color: #007bff;
-        color: white;
-        text-align: right;
-    }
-
-    .chat-input {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 70%;
-        padding: 10px;
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-        display: flex;
-        gap: 10px;
-        background-color: white;
-        border-radius: 20px; /* 모서리를 둥글게 설정 */
-    }
-
-    .chat-input input {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-    }
-
-    .chat-input button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 20px;
-        background-color: #0c04ff;
-        color: white;
-        cursor: pointer;
-    }
-
-    .d-none {
-        display: none !important;
-    }
-
-    .chat-container .message.left table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-
-    .chat-container .message.left th, .chat-container .message.left td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    .chat-container .message.left th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-    }
-</style>
 
 <!-- 추가된 스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
