@@ -57,6 +57,8 @@
 <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">
 <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
 <img src="https://img.shields.io/badge/ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
+![geopy](https://github.com/user-attachments/assets/03ab526a-9c4d-4982-a302-86971c9d78c8)
+
 </div>
 
 
