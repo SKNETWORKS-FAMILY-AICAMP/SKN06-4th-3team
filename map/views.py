@@ -9,7 +9,6 @@ from geopy.distance import geodesic
 # Create your views here.
 def index(request):
     lat_lang = get_user_location_by_ip()
-    print(lat_lang)
     recommended_pharmacies = []
 
     if pharmacy.objects.all().count() == 0:
